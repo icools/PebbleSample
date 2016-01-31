@@ -20,6 +20,7 @@ public class BasePebbleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         registerErrorHandle();
+        registerPebble();
         reciverDataLogging();
         reciverData();
     }
@@ -96,7 +97,7 @@ public class BasePebbleActivity extends AppCompatActivity {
 
         PebbleKit.sendDataToPebble(getApplicationContext(), PEBBLE_APP_UUID, data);
         PebbleKit.sendDataToPebbleWithTransactionId(getApplicationContext(), PEBBLE_APP_UUID, data, 42);
-    }
+}
 
     boolean isPebbleConnected(){
         return PebbleKit.isWatchConnected(getApplicationContext());

@@ -18,15 +18,12 @@ public class MainActivity extends BasePebbleActivity {
 
     TextView mTextPebbleTitle ;
     TextView mTextPebbleDescrption ;
+    TextView mTextIsMessageSupported ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        if(isSupportMessage()){
-            Log.i(TAG_PEBBLE, "Pebble is support message!");
-        }
 
         findViews();
         setListeners();
@@ -36,7 +33,9 @@ public class MainActivity extends BasePebbleActivity {
 
     private void updatePebbleStatus() {
         boolean bConnected = isPebbleConnected();
+        boolean bSupportedMessage = isSupportMessage() ;
         mTextPebbleTitle.setText("Pebble now is connected:" + bConnected); ;
+        mTextIsMessageSupported.setText("Is supported message:" + bSupportedMessage);
     }
 
     private void setListeners() {
@@ -46,6 +45,7 @@ public class MainActivity extends BasePebbleActivity {
     void findViews(){
         mTextPebbleTitle = (TextView) findViewById(R.id.textTitle);
         mTextPebbleDescrption = (TextView) findViewById(R.id.textViewDescrption);
+        mTextIsMessageSupported = (TextView) findViewById(R.id.textMessageSupported);
     }
 }
 //https://developer.getpebble.com/tutorials/android-tutorial/part2/

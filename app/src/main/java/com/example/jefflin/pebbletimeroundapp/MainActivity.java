@@ -39,7 +39,7 @@ public class MainActivity extends BasePebbleActivity {
     }
 
     private void setListeners() {
-
+        // add sample2
     }
 
     void findViews(){

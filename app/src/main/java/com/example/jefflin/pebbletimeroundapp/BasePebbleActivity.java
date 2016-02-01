@@ -10,6 +10,7 @@ import com.getpebble.android.kit.PebbleKit;
 import com.getpebble.android.kit.util.PebbleDictionary;
 import java.util.UUID;
 
+// add git test
 public class BasePebbleActivity extends AppCompatActivity {
 
     public static String TAG_PEBBLE = "Pebble" ;

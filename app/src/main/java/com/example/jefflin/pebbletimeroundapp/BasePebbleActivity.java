@@ -23,7 +23,7 @@ public class BasePebbleActivity extends AppCompatActivity {
         registerErrorHandle();
         registerPebble();
         reciverDataLogging();
-        reciverData();
+        receiverData();
     }
 
     void reciverDataLogging(){
@@ -72,7 +72,7 @@ public class BasePebbleActivity extends AppCompatActivity {
 
     }
 
-    void reciverData(){
+    void receiverData(){
         PebbleKit.registerReceivedDataHandler(this, new PebbleKit.PebbleDataReceiver(PEBBLE_APP_UUID) {
 
             @Override

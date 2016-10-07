@@ -25,10 +25,19 @@ public class MainActivity extends BasePebbleActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        findViews();
-        setListeners();
-        sendMessage();
-        updatePebbleStatus();
+//        findViews();
+//        setListeners();
+//        sendMessage();
+//        updatePebbleStatus();
+//        PebbleKit.PebbleDataReceiver dataReceiver = new PebbleKit.PebbleDataReceiver(PEBBLE_APP_UUID) {
+//
+//            @Override
+//            public void receiveData(Context context, int transaction_id,PebbleDictionary dict) {
+//                mTextPebbleTitle.setText("receiverData");
+//                PebbleKit.sendAckToPebble(context, transaction_id);
+//            }
+//        };
+//        PebbleKit.registerReceivedDataHandler(getApplicationContext(), dataReceiver);
     }
 
     private void updatePebbleStatus() {

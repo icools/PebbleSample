@@ -1,29 +1,31 @@
 package com.example.jefflin.pebbletimeroundapp;
 
+import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.os.IBinder;
+import android.support.annotation.Nullable;
 import android.util.Log;
+
 import com.getpebble.android.kit.PebbleKit;
 import com.getpebble.android.kit.util.PebbleDictionary;
+
 import java.util.UUID;
 
-// add git test
-public class BasePebbleActivity extends AppCompatActivity {
-
-    public static String TAG_PEBBLE = "Pebble" ;
+public class PebbleBackgroundService extends Service {
+    private static final String TAG_PEBBLE = "Pebble" ;
 
     final static UUID PEBBLE_APP_UUID = UUID.fromString("3844571e-f6cc-4670-b573-5d97813330bf");
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        registerErrorHandle();
-        registerPebble();
-        reciverDataLogging();
-        receiverData();
+    public void onCreate() {
+        super.onCreate();
+
+//        registerErrorHandle();
+//        registerPebble();
+//        reciverDataLogging();
+//        receiverData(getApplicationContext());
     }
 
     void reciverDataLogging(){
@@ -72,7 +74,7 @@ public class BasePebbleActivity extends AppCompatActivity {
 
     }
 
-    void receiverData(){
+    void receiverData(Context context){
         PebbleKit.registerReceivedDataHandler(this, new PebbleKit.PebbleDataReceiver(PEBBLE_APP_UUID) {
 
             @Override
@@ -80,7 +82,7 @@ public class BasePebbleActivity extends AppCompatActivity {
                 Log.i(TAG_PEBBLE, "Received value=" + data.getInteger(0).intValue() + " for key: 0");
                 Intent intent = new Intent("NaviKingAction");
                 intent.putExtra("event","1");
-                BasePebbleActivity.this.sendBroadcast(intent);
+                context.sendBroadcast(intent);
                 PebbleKit.sendAckToPebble(getApplicationContext(), transactionId);
             }
 
@@ -99,7 +101,7 @@ public class BasePebbleActivity extends AppCompatActivity {
 
         PebbleKit.sendDataToPebble(getApplicationContext(), PEBBLE_APP_UUID, data);
         PebbleKit.sendDataToPebbleWithTransactionId(getApplicationContext(), PEBBLE_APP_UUID, data, 42);
-}
+    }
 
     boolean isPebbleConnected(){
         return PebbleKit.isWatchConnected(getApplicationContext());
@@ -130,5 +132,16 @@ public class BasePebbleActivity extends AppCompatActivity {
 
     void startPebbleApp(){
         PebbleKit.startAppOnPebble(getApplicationContext(), PEBBLE_APP_UUID);
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        return super.onStartCommand(intent, flags, startId);
+    }
+
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
     }
 }
